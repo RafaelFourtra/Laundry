@@ -38,7 +38,6 @@
                                                     <th scope="col">Jumlah</th>
                                                     <th scope="col">Satuan</th>
                                                     <th scope="col">Harga</th>
-                                                    <th scope="col">Diskon</th>
                                                     <th scope="col">Total</th>
                                                     <th><a href="#" class="btn btn-sm btn-success  rounded-circle"
                                                             id="add_order"><i class="fa fa-plus-circle"></i></a></th>
@@ -71,10 +70,6 @@
                                                     <td>
                                                         <input type="number" name="harga[]" id="harga"
                                                             class="form-control harga" required>
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="diskon[]" id="diskon"
-                                                            class="form-control diskon">
                                                     </td>
                                                     <td>
                                                         <input type="number" name="total_harga[]" id="total_harga"
@@ -151,7 +146,6 @@ $('#add_order').on('click', function(e) {
         '<td> <input type="number" name="jumlah[]" class="form-control jumlah"></td>' +
         '<td> <input type="text" name="satuan[]" class="form-control satuan"></td>' +
         '<td> <input type="number" name="harga[]" class="form-control harga"></td>' +
-        '<td> <input type="number" name="diskon[]" class="form-control diskon"></td>' +
         '<td> <input type="number" name="total_harga[]" class="form-control total_harga"></td>' +
         '<td><a href="" class="btn btn-sm btn-danger delete rounded-circle"><i class="fa fa-times"></i></a></td>';
     $('.addMoreOrder').append(tr);
@@ -183,7 +177,6 @@ $(document).ready(function() {
             '<td> <input type="number" name="jumlah[]" class="form-control jumlah"></td>' +
             '<td> <input type="text" name="satuan[]" class="form-control satuan"></td>' +
             '<td> <input type="number" name="harga[]" class="form-control harga"></td>' +
-            '<td> <input type="number" name="diskon[]" class="form-control diskon"></td>' +
             '<td> <input type="number" name="total_harga[]" class="form-control total_harga"></td>' +
             '<td><a href="" class="btn btn-sm btn-danger delete rounded-circle"><i class="fa fa-times"></i></a></td>';
         $('.addMoreOrder').append(tr);
@@ -212,9 +205,8 @@ $(document).ready(function() {
         tr.find('.satuan').val(satuan);
         var jumlah = tr.find('.jumlah').val() - 0;
         var harga = tr.find('.harga').val() - 0;
-        var diskon = tr.find('.diskon').val() - 0;
         var satuan = tr.find('.satuan').val() - 0;
-        var total_harga = (jumlah * harga) - (diskon);
+        var total_harga = (jumlah * harga);
         tr.find('.total_harga').val(total_harga);
         TotalHarga();
     });
@@ -227,9 +219,8 @@ $(document).ready(function() {
         tr.find('.satuan').val(satuan);
         var jumlah = tr.find('.jumlah').val() - 0;
         var harga = tr.find('.harga').val() - 0;
-        var diskon = tr.find('.diskon').val() - 0;
         var satuan = tr.find('.satuan').val() - 0;
-        var total_harga = (jumlah * harga) - (diskon);
+        var total_harga = (jumlah * harga);
         tr.find('.total_harga').val(total_harga);
         TotalHarga();
     });

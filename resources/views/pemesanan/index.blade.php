@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            @if(request()->user()->hasRole(['admin', 'petugas']))
+                         
                             <div class="col-md-2">
                                 <select class="form-select select-status" id="select">
                                     <option value="Proses" selected>Proses</option>
@@ -25,7 +25,7 @@
                                     class="btn mb-2 btn-success btn-add">
                                     <i class="ti-plus"></i> Tambah</a>
                             </div>
-                            @endif
+                      
                         </div>
                     </div>
                     <div class="card-body">

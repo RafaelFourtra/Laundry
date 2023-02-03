@@ -23,7 +23,7 @@ class Detail_Pemesanan extends Model
 
     public function produk() 
     {
-        return $this->hasMany(Produk::class,'id_produk');
+        return $this->hasOne(Produk::class,'id_produk',"id_jenis");
     }
 
     public function outlet() 

@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('transaksi', TransaksiController::class);
 });
 
+Route::post('/getpesanandetail', [TransaksiController::class,"getpesanandetail"]);
+
 
 Route::get("/tes", function(){
     $data = App\Models\Pemesanan::with("detail_pesanan")->first()->detail_pesanan->first();

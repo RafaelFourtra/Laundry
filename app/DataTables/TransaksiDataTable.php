@@ -11,6 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
 
 class TransaksiDataTable extends DataTable
 {
@@ -23,7 +24,9 @@ class TransaksiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'transaksi.action')
+            ->addColumn('action', function($row, Request $request){
+                return '<button type="button" data-id='.$row->no_pesanan.' data-jenis="detail" class="btn mb-2 btn-primary btn-md action  btn-detail"><i class="ti-pencil"></i></button>';
+                 })
             ->setRowId('id')
             ->addIndexColumn();
     }
@@ -47,20 +50,16 @@ class TransaksiDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->parameters(['searchDelay' => 1000])
+                    ->parameters([ 'searchDelay' => 1000])
                     ->setTableId('transaksi-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
+                    ->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
                     ]);
     }
 
@@ -76,6 +75,7 @@ class TransaksiDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('no_pesanan'),
             Column::make('transaksi_jumlah'),
+            Column::make('diskon'),
             Column::make('pembayaran'),
             Column::make('kembalian'),
             Column::make('transaksi_date')->title('Tanggal Ambil'),

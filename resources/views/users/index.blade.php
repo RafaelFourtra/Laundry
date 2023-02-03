@@ -11,9 +11,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                    @if(request()->user()->hasRole('admin'))
+        
                             <button type="button" class="btn mb-2 btn-success btn-add"><i class="ti-plus"></i> Tambah</button>
-                        @endif
+
                     </div>
                     <div class="card-body">
                     {{ $dataTable->table() }}

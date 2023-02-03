@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\Pemesanan;
+use App\Models\Detail_Pemesanan;
 use App\DataTables\TransaksiDataTable;
 
 class TransaksiController extends Controller
@@ -43,6 +44,7 @@ class TransaksiController extends Controller
         $transaksi->pembayaran = $request->pembayaran;
         $transaksi->kembalian = $request->kembalian;
         $transaksi->transaksi_date = date('Y-m-d');
+        $transaksi->diskon = $request->diskon;
         $transaksi->transaksi_jumlah = $request->transaksi_jumlah;
 
 
@@ -103,5 +105,12 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getpesanandetail(Request $request){
+        $idpesanan = Pemesanan::where("no_pesanan", $request->no_pesanan)->pluck("id")->first();
+         $data = Detail_Pemesanan::where("id_pemesan", $idpesanan)->with("produk")->get();
+
+        return json_encode($data);
     }
 }
