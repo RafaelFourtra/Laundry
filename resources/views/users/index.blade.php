@@ -77,6 +77,7 @@
                         modal.hide()
                     },
                     error: function(res){
+                        alert(res.responseText)
                        let errors = res.responseJSON?.errors
                        $(_form).find('.text-danger.text-small').remove()
                         if(errors){
@@ -129,15 +130,24 @@
      return
     }
     
-
+        
         $.ajax({
             method: 'get', 
             url: `{{url('users/')}}/${id}/edit`,
             success: function(res){
-                console.log(res);
+                
                 $('#modalAction').find('.modal-Dialog').html(res)
+                $("#outlet").children("option").each(function(){
+                    if($(this).attr("id-outlet") !=undefined){
+
+                    }else{
+                        
+                    }
+                })
                 modal.show()
                 store()
+            },error: function(err){
+                alert(err.responseText)
             }
         })
             })

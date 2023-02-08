@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Outlet;
 
 class User extends Authenticatable
 {
@@ -20,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'outlet',
         'email',
         'password',
     ];
@@ -43,4 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function outlet(){
+        return $this->hasOne(Outlet::class, "id_outlet", "outlet");
+    }
 }

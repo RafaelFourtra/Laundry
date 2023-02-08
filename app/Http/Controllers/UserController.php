@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\DataTables\UsersDataTable;
 use App\Models\Role;
+use App\Models\Outlet;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Auth;
@@ -43,7 +44,8 @@ class UserController extends Controller
     public function create()
     {
         $role = Role::all();
-        return view('users.users-action',["role"=>$role]);
+        $outlet = Outlet::all();
+        return view('users.users-action',["role"=>$role , "outlet"=>$outlet]);
     }
 
     /**
@@ -57,6 +59,7 @@ class UserController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
+        $outlet = $request->outlet;
         $role = $request->role;
     
         $default_user_value = [
@@ -69,7 +72,8 @@ class UserController extends Controller
             $account = User::create(array_merge([
                 'email' => $email,
                 'name' => $name,
-                "password" => $password
+                "password" => Hash::make($password),
+                "outlet" => $outlet
             ], $default_user_value));
     
             $account->assignRole($role);
@@ -105,7 +109,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $role = Role::all();
-        return view('users.users-action',["user"=>$user, "role"=>$role]);
+        $outlet = Outlet::all();
+        return view('users.users-action',["user"=>$user, "role"=>$role, "outlet"=>$outlet]);
     }
 
     /**
@@ -118,11 +123,8 @@ class UserController extends Controller
     public function update(UsersRequest $request, User $user)
     {
         $user->email = $request->email;
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
         $user->name = $request->name;
-      
+        $user->outlet = $request->outlet;
         $user->save();
         $user->syncRoles($request->role);
    

@@ -9,13 +9,7 @@
         <div class="title">
 
             @csrf
-            <label for="id_outlet">Outlet</label>
-            <select class="form-control id_outlet" id="id_outlet" name="id_outlet">
-                <option value=""></option>
-                @foreach($outlet as $ol)
-                <option value='{{ $ol->id_outlet }}' required>{{ $ol->alamat_outlet }} , {{ $ol->kota }}</option>
-                @endforeach
-            </select>
+         
         </div>
         <br>
 

@@ -62,7 +62,6 @@ class PemesananController extends Controller
 
             for ($id_produk = 0; $id_produk < count($request->id_produk); $id_produk++){
                 $detail_pemesanan = new Detail_Pemesanan;      
-                $detail_pemesanan->id_outlet = $request->id_outlet;
                 $detail_pemesanan->id_pelanggan = $request->id_pelanggan;
                 $detail_pemesanan->id_jenis = $request->id_produk[$id_produk];
                 $detail_pemesanan->jumlah = $request->jumlah[ $id_produk];

@@ -8,6 +8,7 @@ use App\Http\Controllers\OutletController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\TransaksiController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,7 +58,11 @@ Route::get("/tes", function(){
   //  dd($datapelanggan);
 });
 
-//Akses Data Pesanan
+//Akses Data Pesanan,
 Route::post("/getdetailpesanan",[PemesananController::class, "getdetailpesanan"]);
+
+Route::get("/testing", function(){
+    dd(App\Models\User::with("outlet")->get());
+});
 
 require __DIR__.'/auth.php';

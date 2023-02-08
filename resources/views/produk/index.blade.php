@@ -75,6 +75,7 @@
                         modal.hide()
                     },
                     error: function(res){
+                        alert(res.responseText)
                        let errors = res.responseJSON?.errors
                        $(_form).find('.text-danger.text-small').remove()
                         if(errors){

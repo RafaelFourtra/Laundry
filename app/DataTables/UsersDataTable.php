@@ -82,6 +82,7 @@ class UsersDataTable extends DataTable
            
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('name'),
+            Column::make('outlet'),
             Column::make('roles'),
             Column::make('created_at'),
             Column::computed('action')
