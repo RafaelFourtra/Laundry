@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-md-2">
                                 <a href="{{ route('pemesanan.create') }}" type="button"
-                                    class="btn mb-2 btn-success btn-add">
+                                    class="btn btn-sm mb-2 btn-success btn-add">
                                     <i class="ti-plus"></i> Tambah</a>
                             </div>
                       
@@ -127,9 +127,5 @@ $(document).ready(function() {
             },
         })
     })
-
-    function filterStatus() {
-
-    }
 })
 </script>

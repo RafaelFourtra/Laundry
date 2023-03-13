@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                   
-                            <button type="button" class="btn mb-2 btn-success btn-add"><i class="ti-plus"></i> Tambah</button>
+                            <button type="button" class="btn btn-sm mb-2 btn-success btn-add"><i class="ti-plus"></i> Tambah</button>
                       
                     </div>
                     <div class="card-body">

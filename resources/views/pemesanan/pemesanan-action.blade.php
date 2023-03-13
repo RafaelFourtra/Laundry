@@ -15,7 +15,6 @@
                         <select class="form-select form-select-sm mb-3" aria-label="Default select example"
                             id="statusPemesanan" name="status">
                             <option value="Proses">Proses</option>
-                            <option value="Selesai">Selesai</option>
                             <option value="Batal">Batal</option>
                         </select>
                     </div>

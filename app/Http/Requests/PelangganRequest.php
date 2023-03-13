@@ -27,7 +27,6 @@ class PelangganRequest extends FormRequest
             'nama_pelanggan' => 'required',
             'contact_pelanggan' => 'required',
             'alamat_pelanggan' => 'required',
-            'riwayat_order' => 'required',
         ];
     }
 }

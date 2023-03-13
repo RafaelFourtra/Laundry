@@ -9,7 +9,6 @@
         <div class="title">
 
             @csrf
-         
         </div>
         <br>
 

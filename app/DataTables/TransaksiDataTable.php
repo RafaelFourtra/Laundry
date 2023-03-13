@@ -12,6 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TransaksiDataTable extends DataTable
 {
@@ -39,7 +40,19 @@ class TransaksiDataTable extends DataTable
      */
     public function query(Transaksi $model): QueryBuilder
     {
-        return $model->newQuery();
+        $from_date = $this->request()->get(key: 'from_date');
+        $to_date = $this->request()->get(key: 'to_date');
+        $query = $model->newQuery();
+ 
+
+        if(!empty($from_date) && !empty($to_date)){
+            $from_date = Carbon::parse($from_date);
+            $to_date = Carbon::parse($to_date);
+
+            $query = $query->whereBetween(column:'transaksi_date', values:[$from_date,$to_date]);
+        }
+
+            return $query;
     }
 
     /**

@@ -44,7 +44,11 @@ class TransaksiController extends Controller
         $transaksi->pembayaran = $request->pembayaran;
         $transaksi->kembalian = $request->kembalian;
         $transaksi->transaksi_date = date('Y-m-d');
-        $transaksi->diskon = $request->diskon;
+        if ($request->has('diskon') && $request->diskon != '') {
+            $transaksi->diskon = $request->diskon;
+        } else {
+            $transaksi->diskon = 0;
+        }
         $transaksi->transaksi_jumlah = $request->transaksi_jumlah;
 
 

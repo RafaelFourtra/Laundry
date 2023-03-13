@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Detail_Pemesan;
 use App\Models\Transaksi;
+use App\Models\User;
 
 class Pemesanan extends Model
 {
@@ -22,6 +23,10 @@ class Pemesanan extends Model
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class,"no_pesanan");
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

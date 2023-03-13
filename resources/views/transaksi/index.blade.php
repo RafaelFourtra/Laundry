@@ -95,11 +95,17 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-2">
-                            <a href="{{ route('pemesanan.create') }}" type="button"
-                                class="btn mb-2 btn-success btn-add">
-                                <i class="ti-plus"></i> Tambah</a>
-</div>
+                           <div class="col-md-5">
+                                 <div class="input-group input-daterange">
+                                     <input type="date" name="from_date" id="from_date"  class="form-control" />
+                                     &nbsp;<div class="input-group-addon text-center mx-1">to</div>&nbsp;
+                                     <input type="date"  name="to_date" id="to_date"  class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                 <button type="button" name="filter" id="filter" class="btn btn-sm btn-primary">Filter</button>
+                                 <button type="button" name="refresh" id="refresh" class="btn btn-sm btn-success">Refresh</button>
+                            </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -127,6 +133,28 @@
 {{ $dataTable->scripts() }}
 <script>
 $(document).ready(function() {
+    const table = $('#transaksi-table')
+    table.on('preXhr.dt', function(e,s,d){
+        d.from_date = $('#from_date').val()
+        d.to_date = $('#to_date').val()
+    }),
+
+    $('#filter').click(function(){
+        table.DataTable().ajax.reload()
+        return false
+    }),
+    $('#refresh').click(function(){
+        table.on('preXhr.dt', function(e,s,d){
+        d.from_date = ''
+        d.to_date = ''
+        })
+
+        table.DataTable().ajax.reload()
+        return false
+    })
+
+
+        
     const modal = new bootstrap.Modal($('#modalAction'))
 
     $(document).delegate(".btn-detail", "click", function(){
@@ -202,7 +230,7 @@ $(document).ready(function() {
         }
         $('#diskon').keyup(function() {
             var total = parseInt($('.total-span-input').attr("real-val"));
-            var diskon = parseInt($(this).val());
+            var diskon = parseInt($(this).val()) || 0;
             var tot = total - diskon;
            
             $('.total-span-input').val(tot);

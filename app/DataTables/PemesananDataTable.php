@@ -45,6 +45,12 @@ class PemesananDataTable extends DataTable
                 return $datapelanggan->alamat_pelanggan;
 
             })
+            ->addColumn('user', function($data){
+                //masih objek
+                $usersdata = $data->user->outlet;
+
+                return $usersdata;
+            })
             ->addColumn('contact_pelanggan', function($data){
                 $id = $data->detail_pesanan->first()->id;
                 $datapelanggan = Detail_Pemesanan::with("pelanggan")->find($id)->pelanggan;
@@ -63,14 +69,14 @@ class PemesananDataTable extends DataTable
      */
     public function query(Pemesanan $model): QueryBuilder
     {
-        $query = $model;
+        $query = $model->with('user.outlet');
         $status = $this->request->get("status") == null ? "Proses" :  $this->request->get("status");
 
         if($status==null){
            return $query->newQuery();
         }
         //dd($status);
-        return $model->where("status", $status);
+        return $model->where('status', $status);
     }
 
     /**
@@ -111,6 +117,7 @@ class PemesananDataTable extends DataTable
             Column::computed('nama_pelanggan'), 
             Column::computed('contact_pelanggan'),
             Column::computed('alamat_pelanggan'),  
+            Column::computed('user')->title('Outlet'),  
             Column::make('status'), 
             Column::computed('action')
                   ->exportable(false)
